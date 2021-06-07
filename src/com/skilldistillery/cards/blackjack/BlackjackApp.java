@@ -7,6 +7,7 @@ import com.skilldistillery.players.Player;
 
 public class BlackjackApp {
 
+	boolean playerStand = false; 
 	Scanner scanner = new Scanner(System.in);
 
 	Dealer dealer;
@@ -57,7 +58,7 @@ public class BlackjackApp {
 	}
 
 	protected void gameLogic(Player player, Dealer dealer) {
-
+		
 		dealer = new Dealer();
 		player = new Player();
 		dealFullSuit(player, dealer);
@@ -66,8 +67,7 @@ public class BlackjackApp {
 		
 		while (game) {
 
-			System.out.println("Player hand: " + player.getHand());
-			System.out.println("Dealer shows: " + dealer.getHand());
+			showHands(player, dealer); 
 
 			displayMenuAfterDeal();
 			
@@ -81,6 +81,7 @@ public class BlackjackApp {
 				break;
 			case 2:
 				System.out.println("The player stands.");
+				playerStand = true; 
 				playerStand(player, dealer);
 				bustLogic(player, dealer);
 				checkWinner(player, dealer); 
@@ -104,6 +105,7 @@ public class BlackjackApp {
 		switch (menuBeforeDealChoice) {
 
 		case 1:
+			playerStand = false; 
 			gameLogic(player, dealer);
 			break;
 		case 2:
@@ -217,14 +219,12 @@ public class BlackjackApp {
 	protected void bustLogic(Player player, Dealer dealer) {
 
 		if (player.getHand().getValue() > 21) {
-			System.out.println("Player hand: " + player.getHand());
-			System.out.println("Dealer shows: " + dealer.getHand());
+			showHands(player, dealer); 
 			System.out.println("Player bust. Dealer wins.");
 			playAnotherHandMenu();
 
 		} else if (dealer.getHand().getValue() > 21) {
-			System.out.println("Player hand: " + player.getHand());
-			System.out.println("Dealer shows: " + dealer.getHand());
+			showHands(player, dealer); 
 			System.out.println("Dealer bust. Player wins.");
 			playAnotherHandMenu();
 		}
@@ -243,20 +243,17 @@ public class BlackjackApp {
 	protected void checkWinner(Player player, Dealer dealer) {
 
 		if (player.getHand().getValue() == dealer.getHand().getValue()) {
-			System.out.println("Player hand: " + player.getHand());
-			System.out.println("Dealer shows: " + dealer.getHand());
+			showHands(player, dealer); 
 			System.out.println("Player and dealer draw.");
 			playAnotherHandMenu();
 
 		} else if (player.getHand().getValue() > dealer.getHand().getValue()) {
-			System.out.println("Player hand: " + player.getHand());
-			System.out.println("Dealer shows: " + dealer.getHand());
+			showHands(player, dealer); 
 			System.out.println("Player wins.");
 			playAnotherHandMenu();
 			
 		} else if (dealer.getHand().getValue() > player.getHand().getValue()) {
-			System.out.println("Player hand: " + player.getHand());
-			System.out.println("Dealer shows: " + dealer.getHand());
+			showHands(player, dealer); 
 			System.out.println("Dealer wins.");
 			playAnotherHandMenu();
 		}
@@ -266,24 +263,33 @@ public class BlackjackApp {
 	protected void blackjack(Player player, Dealer dealer) {
 		
 		if(dealer.getHand().getValue() == 21 && player.getHand().getValue() == 21) {
-			System.out.println("Player hand: " + player.getHand());
-			System.out.println("Dealer shows: " + dealer.getHand());
+			showHands(player, dealer); 
 			System.out.println("Dealer and player have Blackjack. It's a draw.");
 			playAnotherHandMenu(); 
 			
 		} else if(dealer.getHand().getValue() == 21) {
-			System.out.println("Player hand: " + player.getHand());
-			System.out.println("Dealer shows: " + dealer.getHand());
+			showHands(player, dealer); 
 			System.out.println("Dealer Blackjack.");
 			playAnotherHandMenu(); 
 		
 		} else if(player.getHand().getValue() == 21) {
-			System.out.println("Player hand: " + player.getHand());
-			System.out.println("Dealer shows: " + dealer.getHand());
+			showHands(player, dealer); 
 			System.out.println("Player Blackjack.");
 			playAnotherHandMenu(); 
 		}
 		
+	}
+	
+	protected void showHands(Player player, Dealer dealer) {
+		
+		if(playerStand == true) {
+		System.out.println("Player hand: " + player.getHand());
+		System.out.println("Dealer shows: " + dealer.getHand());
+	
+		} else if(playerStand == false) {
+			System.out.println("Player hand: " + player.getHand());
+			System.out.println("Dealer shows: " + "(CARD FACED DOWN) " + dealer.getHand().getHand().get(1));
+		}
 	}
 
 	protected void quitApp() {
