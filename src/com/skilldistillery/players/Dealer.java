@@ -2,6 +2,7 @@ package com.skilldistillery.players;
 
 import com.skilldistillery.cards.common.Card;
 import com.skilldistillery.cards.common.Deck;
+import com.skilldistillery.cards.common.Hand;
 
 public class Dealer extends Player {
 
@@ -13,6 +14,7 @@ public class Dealer extends Player {
 	 Player player; 
 
 	private Deck deck = new Deck();
+	private Hand hand = new Hand(); 
 
 	public Dealer() {
 		shuffle();
@@ -23,41 +25,15 @@ public class Dealer extends Player {
 		deck.shuffle();
 
 	}
-	
-	public void dealFullSuit() {
-		
-		// create a dealer
-		// create a player
-		 dealer = new Dealer(); 
-		 player = new Player(); 
-		 
-		// deal a card to the player
-		dealer.dealCard(player);
-		 									        // TODO: need to display the card dealt
-		// deal a card to the dealer
-		dealer.dealCard(dealer);
-										         	// do not display the card dealt
-		// deal a card to the player
-		dealer.dealCard(player);
-										        	// TODO: need to display the card dealt
-		// deal the last card to the dealer
-		dealer.dealCard(dealer);
-											       // TODO: need to display the card dealt
-		
-		System.out.println("Your hand: " + );      // TODO: need to display the player's hand
-		System.out.println("Dealer shows: " + );   // TODO: need to display the dealer's face card
-		
-	}
 
-	public void dealCard(Player player) {
+	public Card dealCard(Player player) {
 
 		// dealer remove a card from the deck
-		Card card = deck.getCard();
+		Card card = deck.removeCard();
 
 		// dealer gives that card to the player object
 		// pass the card to the player's hand
-		player.addCardToHand(card);
-
+		return card; 
 	}
 
 	public Deck getDeck() {

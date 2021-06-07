@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Hand {
 
+	// add a isBust method
+	// add a isBlackjack method
+	
 	// a hand holds cards
 	private List<Card> hand = new ArrayList<>();
 
@@ -33,9 +36,16 @@ public class Hand {
 
 	@Override
 	public String toString() {
-		return "Hand [hand=" + hand + "]";
+		return hand + " ";
+	//	return "Hand [hand=" + hand + "]";
 	}
-
+	
+//	public void showHand() {
+//		for(int i = 0; i < this.hand.size(); i++) {
+//			System.out.print(this.getHand().get(i).toString() + " ");
+//		}
+//	}
+	
 	public Hand(List<Card> hand) {
 		super();
 		this.hand = hand;

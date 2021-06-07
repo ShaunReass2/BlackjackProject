@@ -16,8 +16,10 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "[Rank " + rank + " of " + ", suit " + suit + "]";
+		return rank + " of " + suit;                // TODO: rework this
+//		return "[Rank " + rank + " of " + ", suit " + suit + "]";     
 	}
+
 
 	@Override
 	public int hashCode() {

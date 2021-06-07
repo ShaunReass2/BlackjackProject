@@ -29,7 +29,7 @@ public class Deck {
 		Collections.shuffle(cards);
 	}
 
-	public Card getCard() {
+	public Card removeCard() {
 		return cards.remove(0);
 	}
 
@@ -68,7 +68,8 @@ public class Deck {
 
 	@Override
 	public String toString() {
-		return "Deck [cards=" + cards + "]";
+		return cards + "";
+//		return "Deck [cards=" + cards + "]";
 	}
 
 	
